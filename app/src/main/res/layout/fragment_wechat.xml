@@ -18,9 +18,10 @@
             />
 
         <Button
+            android:id="@+id/add_new_friend"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="新的朋友"/>
+            android:text="@string/newFriend"/>
 
         <TextView
             android:layout_width="match_parent"

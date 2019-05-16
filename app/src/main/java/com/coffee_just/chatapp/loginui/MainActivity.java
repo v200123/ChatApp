@@ -118,6 +118,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         //提交、注册
         mBtLoginSubmit = findViewById(R.id.bt_login_submit);
+        mBtLoginSubmit.setEnabled(false);
+        mBtLoginSubmit.setBackgroundResource(R.drawable.bg_login_submit_lock);
+        mBtLoginSubmit.setTextColor(getResources().getColor(R.color.account_lock_font_color));
         mBtLoginRegister = findViewById(R.id.bt_login_register);
 
         //忘记密码
@@ -408,9 +411,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (!TextUtils.isEmpty(pwd) && !TextUtils.isEmpty(username)) {
             mBtLoginSubmit.setBackgroundResource(R.drawable.bg_login_submit);
             mBtLoginSubmit.setTextColor(getResources().getColor(R.color.white));
+            mBtLoginSubmit.setEnabled(true);
         } else {
             mBtLoginSubmit.setBackgroundResource(R.drawable.bg_login_submit_lock);
             mBtLoginSubmit.setTextColor(getResources().getColor(R.color.account_lock_font_color));
+            mBtLoginSubmit.setEnabled(false);
         }
     }
 

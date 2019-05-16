@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.coffee_just.chatapp.Chat.ChatActivity;
 import com.coffee_just.chatapp.R;
+import com.coffee_just.chatapp.bean.contactInfo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,17 +21,17 @@ import java.util.List;
 
 public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.ViewHolder> {
     private Context mContext;
-
-    public RecycleViewAdapter(Context context, List<String> list) {
+    private ArrayList<contactInfo> mContactLab;
+    public RecycleViewAdapter(Context context, ArrayList<contactInfo> list) {
         if (list != null)
             mContactLab = list;
         else {
-            list = new ArrayList<>();
+            mContactLab = new ArrayList<>();
         }
         mContext = context;
     }
 
-    private List<String> mContactLab;
+
 
     @NonNull
     @Override
@@ -41,11 +42,11 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.tv_contactname.setText(mContactLab.get(position));
+        holder.tv_contactname.setText(mContactLab.get(position).getUserName());
         holder.layoutGotoChat.setOnClickListener(l -> {
 //                    Intent i  = new Intent()
             // todo  这里需要跳转，并且通信instance
-            Intent intent = ChatActivity.instance(mContext, mContactLab.get(position));
+            Intent intent = ChatActivity.instance(mContext, mContactLab.get(position).getUserName());
             mContext.startActivity(intent);
         });
     }
@@ -55,6 +56,11 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
 
         return mContactLab == null ? 0 : mContactLab.size();
     }
+    public void addData(contactInfo contactInfo) {
+        mContactLab.add(contactInfo);
+        notifyItemInserted(mContactLab.size());
+    }
+
 
     class ViewHolder extends RecyclerView.ViewHolder {
         private TextView tv_contactname;

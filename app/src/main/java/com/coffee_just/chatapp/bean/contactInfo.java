@@ -42,6 +42,12 @@ public class contactInfo extends LitePalSupport {
 
     private String  avatar;//别名
 
+    public int getId() {
+        return id;
+    }
+
+    private int id;
+
 
 
 }
