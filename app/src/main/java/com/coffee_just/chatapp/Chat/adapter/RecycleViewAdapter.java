@@ -58,7 +58,7 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
     }
     public void addData(contactInfo contactInfo) {
         mContactLab.add(contactInfo);
-        notifyItemInserted(mContactLab.size());
+        notifyDataSetChanged();
     }
 
 

@@ -9,17 +9,24 @@ import androidx.viewpager.widget.ViewPager;
 import com.coffee_just.chatapp.Chat.adapter.FragmentViewPage;
 import com.coffee_just.chatapp.R;
 import com.coffee_just.chatapp.Untils.L;
+import com.coffee_just.chatapp.bean.Message;
 import com.google.android.material.tabs.TabLayout;
 import com.hyphenate.EMConnectionListener;
 import com.hyphenate.EMError;
+import com.hyphenate.EMMessageListener;
 import com.hyphenate.chat.EMClient;
+import com.hyphenate.chat.EMMessage;
+import com.hyphenate.chat.EMMessageBody;
 import com.hyphenate.util.NetUtils;
+
+import java.util.List;
 
 public class ChatViewActivity extends AppCompatActivity {
     private ViewPager mViewPageChatView;
     private TabLayout mTabLayoutChatView;
     private TabLayout.Tab one;
     private TabLayout.Tab two;
+    private EMMessageListener msgListener;//监听消息
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -40,6 +47,24 @@ public class ChatViewActivity extends AppCompatActivity {
         two = mTabLayoutChatView.getTabAt(1);
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        getMsg();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        EMClient.getInstance().chatManager().removeMessageListener(msgListener);
+        L.d("监听消息已经被注销");
+    }
 
     private class MyConnectionListener implements EMConnectionListener {
 
@@ -56,6 +81,7 @@ public class ChatViewActivity extends AppCompatActivity {
                 public void run() {
                     if (errorCode == EMError.USER_REMOVED) {
                         // 显示帐号已经被移除
+
                     } else if (errorCode == EMError.USER_LOGIN_ANOTHER_DEVICE) {
                         // 显示帐号在其他设备登录
                         L.d("账号已经被踢出去了");
@@ -75,5 +101,48 @@ public class ChatViewActivity extends AppCompatActivity {
             });
         }
 
+    }
+
+    private void getMsg(){
+
+
+        msgListener= new EMMessageListener(){
+
+            @Override
+            public void onMessageReceived(List<EMMessage> list) {
+                EMMessage message = list.get(0);
+
+
+
+            }
+
+        @Override
+            public void onCmdMessageReceived(List<EMMessage> list) {
+
+            }
+
+            @Override
+            public void onMessageRead(List<EMMessage> list) {
+
+            }
+
+            @Override
+            public void onMessageDelivered(List<EMMessage> list) {
+
+            }
+
+            @Override
+            public void onMessageRecalled(List<EMMessage> list) {
+
+            }
+
+            @Override
+            public void onMessageChanged(EMMessage emMessage, Object o) {
+
+            }
+        };
+
+        EMClient.getInstance().chatManager().addMessageListener(msgListener);
+        L.d("监听消息已经被注册");
     }
 }

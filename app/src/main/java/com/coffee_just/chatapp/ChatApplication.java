@@ -40,6 +40,8 @@ public class ChatApplication extends LitePalApplication {
         EMClient.getInstance().setDebugMode(false);
     }
 
+
+
     private String getAppName(int pID) {
         String processName = null;
         ActivityManager am = (ActivityManager) this.getSystemService(ACTIVITY_SERVICE);
@@ -59,4 +61,5 @@ public class ChatApplication extends LitePalApplication {
         }
         return processName;
     }
+
 }

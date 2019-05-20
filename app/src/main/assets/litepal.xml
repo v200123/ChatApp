@@ -2,8 +2,9 @@
 <litepal>
 
     <dbname value="weChat" />
-    <version value="2" />
+    <version value="3" />
     <list>
             <mapping class="com.coffee_just.chatapp.bean.contactInfo"></mapping>
+        <mapping class="com.coffee_just.chatapp.bean.Message"></mapping>
     </list>
 </litepal>
