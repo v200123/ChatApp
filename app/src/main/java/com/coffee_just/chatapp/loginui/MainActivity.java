@@ -4,8 +4,12 @@ import android.Manifest;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
+import android.annotation.TargetApi;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Intent;
 import android.graphics.Rect;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -15,6 +19,7 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -67,6 +72,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private int mLogoHeight;
     private int mLogoWidth;
+    private CheckBox isAutoLogin;
+    private boolean autoLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +81,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main_login);
         checkPermissionRequest(MainActivity.this);
         initView();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
+        createNotificationChannel("1","ChatMsg",NotificationManager.IMPORTANCE_HIGH);
+        if (EMClient.getInstance().isLoggedInBefore() && EMClient.getInstance().isConnected()) {
+            autoLogin = true;
+            startActivity(new Intent(this, ChatViewActivity.class));
+            finish();
+        }
 //        RequestBody requestBody = new FormBody.Builder()
 //                .add("org_name","1102190314065013")
 //                .add("app_name","1102190314065013#wechat")
@@ -98,7 +112,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mLlLoginLayer = findViewById(R.id.ll_login_layer);
 //        mLlLoginPull = findViewById(R.id.ll_login_pull);
 //        mLlLoginOptions = findViewById(R.id.ll_login_options);
-
+        isAutoLogin = findViewById(R.id.cb_remember_login);
+        autoLogin = isAutoLogin.isChecked();
         //导航栏+返回按钮
         mLayBackBar = findViewById(R.id.ly_retrieve_bar);
         mIbNavigationBack = findViewById(R.id.ib_navigation_back);
@@ -430,11 +445,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 Intent intent = new Intent(MainActivity.this, ChatViewActivity.class);
                 startActivity(intent);
+                finish();
             }
 
             @Override
             public void onError(int code, String error) {
                 L.e("错误原因为：" + error + "\t错误代码为" + code);
+                Toast.makeText(getApplicationContext(),"登陆失败："+error,Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -491,6 +508,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     }
                     return;
                 });
+    }
+
+    @TargetApi(Build.VERSION_CODES.O)
+    private void createNotificationChannel(String channelId, String channelName, int importance) {
+        NotificationChannel channel = new NotificationChannel(channelId, channelName, importance);
+        NotificationManager notificationManager = (NotificationManager) getSystemService(
+                NOTIFICATION_SERVICE);
+        notificationManager.createNotificationChannel(channel);
     }
 
 

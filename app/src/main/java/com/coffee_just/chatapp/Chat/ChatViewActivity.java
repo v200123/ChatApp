@@ -17,6 +17,7 @@ import com.hyphenate.EMMessageListener;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMMessage;
 import com.hyphenate.chat.EMMessageBody;
+import com.hyphenate.chat.EMTextMessageBody;
 import com.hyphenate.util.NetUtils;
 
 import java.util.List;
@@ -34,6 +35,8 @@ public class ChatViewActivity extends AppCompatActivity {
         setContentView(R.layout.activity_chat_view);
         initView();
         EMClient.getInstance().addConnectionListener(new MyConnectionListener());
+        EMClient.getInstance().groupManager().loadAllGroups();
+        EMClient.getInstance().chatManager().loadAllConversations();
     }
 
     private void initView() {
@@ -50,7 +53,7 @@ public class ChatViewActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        getMsg();
+
     }
 
     @Override
@@ -86,8 +89,7 @@ public class ChatViewActivity extends AppCompatActivity {
                         // 显示帐号在其他设备登录
                         L.d("账号已经被踢出去了");
                         EMClient.getInstance().logout(true);
-                    }
-                    else {
+                    } else {
                         if (NetUtils.hasNetwork(ChatViewActivity.this)) {
 
                         }
@@ -103,46 +105,5 @@ public class ChatViewActivity extends AppCompatActivity {
 
     }
 
-    private void getMsg(){
 
-
-        msgListener= new EMMessageListener(){
-
-            @Override
-            public void onMessageReceived(List<EMMessage> list) {
-                EMMessage message = list.get(0);
-
-
-
-            }
-
-        @Override
-            public void onCmdMessageReceived(List<EMMessage> list) {
-
-            }
-
-            @Override
-            public void onMessageRead(List<EMMessage> list) {
-
-            }
-
-            @Override
-            public void onMessageDelivered(List<EMMessage> list) {
-
-            }
-
-            @Override
-            public void onMessageRecalled(List<EMMessage> list) {
-
-            }
-
-            @Override
-            public void onMessageChanged(EMMessage emMessage, Object o) {
-
-            }
-        };
-
-        EMClient.getInstance().chatManager().addMessageListener(msgListener);
-        L.d("监听消息已经被注册");
-    }
 }

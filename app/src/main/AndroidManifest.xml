@@ -87,16 +87,16 @@
             android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
             android:name=".Chat.ChatViewActivity"
-            android:label="登录后的主界面">
+            android:label="这是假的">
 
             <!-- <intent-filter> -->
             <!-- <action android:name="android.intent.action.MAIN" /> -->
             <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
             <!-- </intent-filter> -->
         </activity>
-        <activity
-            android:name=".Chat.ChatActivity"
-            android:theme="@style/Chat_View_NoTitle"></activity>
+        <activity android:name=".Chat.ChatActivity" android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar">
+
+        </activity>
     </application>
 
 </manifest>

@@ -13,16 +13,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.coffee_just.chatapp.Chat.ChatActivity;
 import com.coffee_just.chatapp.R;
+import com.coffee_just.chatapp.Untils.L;
 import com.coffee_just.chatapp.bean.contactInfo;
+import com.coffee_just.chatapp.impl.OnremoveListnner;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
-public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.ViewHolder> {
+public class contactRecycleAdapter extends RecyclerView.Adapter<contactRecycleAdapter.ViewHolder> {
     private Context mContext;
     private ArrayList<contactInfo> mContactLab;
-    public RecycleViewAdapter(Context context, ArrayList<contactInfo> list) {
+    private OnremoveListnner mOnremoveListnner;
+    public contactRecycleAdapter(Context context, ArrayList<contactInfo> list) {
         if (list != null)
             mContactLab = list;
         else {
@@ -32,6 +34,10 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
     }
 
 
+    public void serOnremoveContactListnner(OnremoveListnner onremoveListnner)
+    {
+        this.mOnremoveListnner = onremoveListnner;
+    }
 
     @NonNull
     @Override
@@ -49,7 +55,20 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
             Intent intent = ChatActivity.instance(mContext, mContactLab.get(position).getUserName());
             mContext.startActivity(intent);
         });
+        holder.layoutGotoChat.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                if(mOnremoveListnner!=null)
+                {
+                    mOnremoveListnner.delectContact(position);
+                    L.d("已经得到了删除");
+                }
+                return true;
+            }
+        });
     }
+
+
 
     @Override
     public int getItemCount() {

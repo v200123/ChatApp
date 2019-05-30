@@ -17,25 +17,19 @@ public class Message extends LitePalSupport {
         Message = message;
     }
 
-    public void setType(String type) {
+    public void setType(EMMessage.Direct type) {
         Type = type;
     }
 
     private String fromUser;
     private String toUser;
     private String Message;
-    private String Type;
+    private EMMessage.Direct Type;
 
-    public Message(String fromUser, String type, String message) {
-        this(fromUser, message);
+    public Message(String fromUser, EMMessage.Direct type, String message) {
         Type = type;
     }
 
-
-    public Message(String fromUser, String message) {
-        this.fromUser = fromUser;
-        Message = message;
-    }
 
     public String getMessage() {
         return Message;
