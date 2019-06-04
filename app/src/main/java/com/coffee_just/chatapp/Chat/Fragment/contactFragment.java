@@ -59,7 +59,7 @@ public class contactFragment extends Fragment {
             new AddFridensDialogFragment().show(getFragmentManager(),"dialog_fragment");
         });
         new Thread(new getContact()).start();
-
+    L.d("视图得到初始化");
         return v;
 
     }

@@ -8,23 +8,23 @@ import android.widget.Toast;
 
 import com.coffee_just.chatapp.bean.FeedBackMsg;
 import com.coffee_just.chatapp.feedback.Listener.OnSendListener;
+import com.hyphenate.chat.EMClient;
+import com.hyphenate.chat.EMMessage;
 
 public class FeedBack implements IFeedBack {
     private final Uri uri = Uri.parse("mailto:");
     @Override
-    public void sendMag(Context context,FeedBackMsg msg, OnSendListener mListener) {
-        Intent i = new Intent(Intent.ACTION_SENDTO);
-//        i.setType("text/plain");
-        i.putExtra(Intent.EXTRA_SUBJECT,"这是一个标题");
-        i.putExtra(Intent.EXTRA_EMAIL,"llhm2013lc@foxmail.com");
-        try {
-            context.startActivity(i);
-        }
-        catch (ActivityNotFoundException e)
+    public void sendMag(String msg, OnSendListener mListener) {
+        if(msg.isEmpty())
         {
-            Toast.makeText(context,e.getMessage(),Toast.LENGTH_SHORT).show();
-        }
+            mListener.failed();
 
+        }
+        else {
+        EMMessage message = EMMessage.createTxtSendMessage(msg,"v200123");
+        EMClient.getInstance().chatManager().sendMessage(message);
+        mListener.success();
+        }
 
     }
 }

@@ -97,7 +97,7 @@
             <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
             <!-- </intent-filter> -->
         </activity>
-        <activity android:name=".feedback.FeedBackActivity"></activity>
+        <activity android:name=".feedback.View.FeedBackActivity"></activity>
         <activity android:name=".Chat.ChatActivity" android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar">
 
         </activity>

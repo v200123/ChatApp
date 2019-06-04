@@ -10,4 +10,5 @@ public interface    MvpView {
     void dismissLoadingBar();
     void clearLoading();
 
+
 }

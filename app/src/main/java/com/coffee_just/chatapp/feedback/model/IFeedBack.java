@@ -6,5 +6,5 @@ import com.coffee_just.chatapp.bean.FeedBackMsg;
 import com.coffee_just.chatapp.feedback.Listener.OnSendListener;
 
 public interface IFeedBack {
-    void sendMag(Context context,FeedBackMsg msg, OnSendListener mListener);
+    void sendMag(String msg, OnSendListener mListener);
 }

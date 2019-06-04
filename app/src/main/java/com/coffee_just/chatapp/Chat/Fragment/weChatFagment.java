@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.coffee_just.chatapp.Chat.adapter.FragmentConversationAdapter;
 import com.coffee_just.chatapp.R;
+import com.coffee_just.chatapp.Untils.L;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMConversation;
 
@@ -31,16 +32,20 @@ public class weChatFagment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        L.d("视图得到更新01");
         return inflater.inflate(R.layout.fragment_conversation,container,false);
+
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         initView(view);
         initData();
+        L.d("视图得到更新02");
     }
 
     private void initData() {
+        conversationList.clear();
         conversationList.addAll(loadConversationList());
     }
 

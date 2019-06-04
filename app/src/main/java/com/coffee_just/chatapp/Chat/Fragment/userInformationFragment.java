@@ -14,8 +14,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.coffee_just.chatapp.R;
-import com.coffee_just.chatapp.feedback.FeedBackActivity;
-import com.coffee_just.chatapp.feedback.model.FeedBack;
+import com.coffee_just.chatapp.feedback.View.FeedBackActivity;
 import com.coffee_just.chatapp.loginui.MainActivity;
 import com.hyphenate.chat.EMClient;
 
@@ -47,5 +46,9 @@ public class userInformationFragment extends Fragment {
         });
         tvName.setText(EMClient.getInstance().getCurrentUser());
 
+        if(EMClient.getInstance().getCurrentUser().equals("v200123"))
+        {
+            tvFeddBack.setVisibility(View.GONE);
+        }
     }
 }
