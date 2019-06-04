@@ -32,7 +32,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         //文本框的改变去控制按钮的启用
         userName.addTextChangedListener(this);
         userPassword.addTextChangedListener(this);
-        findViewById(R.id.ib_navigation_back).setOnClickListener(this);
+//        findViewById(R.id.ib_navigation_back).setOnClickListener(this);
         btnSubmit = findViewById(R.id.bt_register_submit);
         btnSubmit.setOnClickListener(this);
 
@@ -41,9 +41,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.ib_navigation_back:
-                finish();
-                break;
+//            case R.id.ib_navigation_back:
+//                finish();
+//                break;
             case R.id.bt_register_submit:
                 registerUser(userName.getText().toString(), userPassword.getText().toString());
                 break;

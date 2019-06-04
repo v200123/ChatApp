@@ -62,4 +62,9 @@ public class ChatApplication extends LitePalApplication {
         return processName;
     }
 
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+
+    }
 }

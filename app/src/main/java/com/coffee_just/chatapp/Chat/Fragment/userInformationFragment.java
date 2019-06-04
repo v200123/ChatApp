@@ -14,13 +14,15 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.coffee_just.chatapp.R;
+import com.coffee_just.chatapp.feedback.FeedBackActivity;
+import com.coffee_just.chatapp.feedback.model.FeedBack;
 import com.coffee_just.chatapp.loginui.MainActivity;
 import com.hyphenate.chat.EMClient;
-import com.hyphenate.chat.EMConversation;
 
 public class userInformationFragment extends Fragment {
-    private TextView tvName;
+    private TextView tvName,tvFeddBack;
     private Button btnExitLogin;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -32,6 +34,10 @@ public class userInformationFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         tvName = view.findViewById(R.id.tv_username);
         btnExitLogin = view.findViewById(R.id.btnExitLogin);
+        tvFeddBack = view.findViewById(R.id.tv_feedback);
+        tvFeddBack.setOnClickListener(v->{
+            startActivity(new Intent(getActivity(), FeedBackActivity.class));
+        });
         btnExitLogin.setOnClickListener(l->{
             EMClient.getInstance().logout(true);
             Toast.makeText(getContext(),"退出登录",Toast.LENGTH_SHORT).show();

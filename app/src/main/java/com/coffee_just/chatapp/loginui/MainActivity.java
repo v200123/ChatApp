@@ -116,7 +116,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         autoLogin = isAutoLogin.isChecked();
         //导航栏+返回按钮
         mLayBackBar = findViewById(R.id.ly_retrieve_bar);
-        mIbNavigationBack = findViewById(R.id.ib_navigation_back);
+
 
         //logo
         mIvLoginLogo = findViewById(R.id.iv_login_logo);
@@ -139,12 +139,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mBtLoginRegister = findViewById(R.id.bt_login_register);
 
         //忘记密码
-        mTvLoginForgetPwd = findViewById(R.id.tv_login_forget_pwd);
-        mTvLoginForgetPwd.setOnClickListener(this);
+//        mTvLoginForgetPwd = findViewById(R.id.tv_login_forget_pwd);
+//        mTvLoginForgetPwd.setOnClickListener(this);
 
         //注册点击事件
 //        mLlLoginPull.setOnClickListener(this);
-        mIbNavigationBack.setOnClickListener(this);
+//        mIbNavigationBack.setOnClickListener(this);
         mEtLoginUsername.setOnClickListener(this);
         mIvLoginUsernameDel.setOnClickListener(this);
         mBtLoginSubmit.setOnClickListener(this);
@@ -166,10 +166,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.ib_navigation_back:
-                //返回
-                finish();
-                break;
+//            case R.id.ib_navigation_back:
+//                //返回
+//                finish();
+//                break;
             case R.id.et_login_username:
                 mEtLoginPwd.clearFocus();
                 mEtLoginUsername.setFocusableInTouchMode(true);
@@ -196,10 +196,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 //注册
                 startActivity(new Intent(MainActivity.this, RegisterActivity.class));
                 break;
-            case R.id.tv_login_forget_pwd:
-                //忘记密码
-                startActivity(new Intent(MainActivity.this, ForgetPwdActivity.class));
-                break;
+//            case R.id.tv_login_forget_pwd:
+//                //忘记密码
+//                startActivity(new Intent(MainActivity.this, ForgetPwdActivity.class));
+//                break;
 //            case R.id.ll_login_layer:
 //            case R.id.ll_login_pull:
 //                mLlLoginPull.animate().cancel();
